@@ -3,6 +3,7 @@ import { ActiviesController } from './controllers/ActiviesController';
 import { CourseUnitsController } from './controllers/CourseUnitsController';
 import { UserController } from './controllers/UsersController';
 import {AuthenticationController} from './controllers/AuthenticationController';
+import authenticated from './middlewares/authenticated';
 
 interface UserRequest{
     name: string;
@@ -22,10 +23,8 @@ router.post('/auth', () => authenticationController.create);
 
 router.post('/user', () => userController.create);
 
-router.post('/activy', () => activityController.create);
+router.post('/activy', authenticated, () => activityController.create);
 
-router.post('/courseunit', () => courseController.create);
-
-
+router.post('/courseunit', authenticated, () => courseController.create);
 
 export default router;
