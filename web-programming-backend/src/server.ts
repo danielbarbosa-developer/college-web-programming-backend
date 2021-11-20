@@ -1,11 +1,16 @@
+import 'dotenv/config';
 import express from 'express';
+import './database';
 import cors from 'cors';
+import routes from './routes';
+import config from './config/server';
 
-const server = express();
+const app = express();
+const port = config.server.port;
 
-server.use(cors());
+app.use(cors());
+app.use(express.json());
+app.use(routes);
 
-server.use(express.json());
-
-server.listen(3333, () => console.log('Server listen on port 3333'));
+app.listen(port, () => console.log('Server started'));
 
